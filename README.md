@@ -7,7 +7,8 @@ Some of the links may have changed since I originally wrote this, but you should
 
 At the time of this writing (2021/05/14,) the Modbus documentation could be downloaded from Schneider's website under "Technical Publications" on the Conext Gateway page.
 
-The code is a little rough.  I haven't decided if separating the registers from the code is worthwhile or not.  It is just as easy to edit the Python code to update the devices and register data.  For more information you can check out my YouTube channel: JC/DC in the AZ.
+The code is a little rough.  I haven't decided if separating the registers from the code is worthwhile or not.  It is just as easy to edit the Python code to update the devices and register data.  For more information you can check out my YouTube channel:
+[JC/DC in the AZ](https://www.youtube.com/channel/UC8_TU2g-Yl1oMCts3pkXCbQ)
 
 # Setup
 You'll of course need a Schneider Conext Gateway connected to your network or using a serial ModBus connection to your computer.
