@@ -24,9 +24,10 @@ device_ids = {
 registers_data = {
     "battery": {
         "name": "0,8,0",
-        "capacity": "88,2,0",
+        "voltage": "70,2,1000",
+        "temp": "74,2,-273",
         "soc": "76,2,0",
-        "voltage": "70,2,1000"
+        "capacity": "88,2,0"
     },
     "inverter": {
         "name": "0,8,0",
@@ -39,13 +40,13 @@ registers_data = {
     },
     "cc": {
         "name": "0,8,0",
-        "solararray": "249,1,0",
         "state": "64,1,0",
         "faults": "68,1,0",
         "warnings": "69,1,0",
         "status": "73,1,0",
         "pvpower": "80,2,0",
-        "dcpower": "92,2,0"
+        "dcpower": "92,2,0",
+        "solararray": "249,1,0"
     }
 }
 
@@ -150,6 +151,8 @@ def get_modbus_values(device, device_instance):
                 if register == "70":
                     converted_value = converted_value / int(extra)
                     converted_value = converted_value
+                elif register == "74":
+                    converted_value = converted_value * 0.01 + int(extra)
                 elif register == "76":
                     converted_value = converted_value
                 elif register == "88":
