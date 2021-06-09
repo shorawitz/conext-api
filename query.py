@@ -7,16 +7,20 @@ import sys, getopt, re
 
 # Default data type
 data_type = "uint16"
+ip = None
+
 
 try:
-    opts, args = getopt.getopt(sys.argv[1:],"hp:u:r:t:",["port=","unit_id=","register","type"])
+    opts, args = getopt.getopt(sys.argv[1:],"hi:p:u:r:t:",["ip=","port=","unit_id=","register","type"])
 except getopt.GetoptError:
-    print('query.py -p <port> -u <unit_id> -r <register> (-t <type> | default=uint16)')
+    print('query.py -i <ip address> -p <port> -u <unit_id> -r <register> (-t <type> | default=uint16)')
     sys.exit(2)
 for opt, arg in opts:
     if opt == '-h':
-        print('query.py -p <port> -u <unit_id> -r <register>')
+        print('query.py -i <ip address> -p <port> -u <unit_id> -r <register> -t <value data type>')
         sys.exit()
+    elif opt in ("-i", "--ip"):
+        ip = arg
     elif opt in ("-p", "--port"):
         port = arg
     elif opt in ("-u", "--unit_id"):
@@ -25,13 +29,16 @@ for opt, arg in opts:
         reg = arg
     elif opt in ("-t", "--type"):
         reg_type = arg
+    else:
+        print('Unknown option')
+        sys.exit(2)
 
-if not port or not unit_id or not reg:
-    print('query.py -p <port> -u <unit_id> -r <register> (-t <type> | default=uint16)')
+if not ip or not port or not unit_id or not reg:
+    print('query.py -i <ip address> -p <port> -u <unit_id> -r <register> (-t <type> | default=uint16)')
     sys.exit()
 
 
-client = ModbusClient(host="192.168.0.152", port=port, auto_open=True, auto_close=True, debug=False, unit_id=unit_id, timeout=30)
+client = ModbusClient(host=ip, port=port, auto_open=True, auto_close=True, debug=False, unit_id=unit_id, timeout=30)
 # Setup registers with ADDRESS,REG_COUNT,TYPE
 # Address: reg_count (uint16: 1, uint32: 2, str16: 8, str32: 16)
 
