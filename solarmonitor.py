@@ -157,6 +157,8 @@ def get_modbus_values(device, device_instance):
                     converted_value = converted_value
                 elif register == "88":
                     converted_value = converted_value
+                else:
+                    converted_value = 0
 
             if device == "inverter":
                 if register == "64":
@@ -166,6 +168,8 @@ def get_modbus_values(device, device_instance):
                 elif register == "154":
                     #print("Inverter load: {}".format(converted_value))
                     converted_value = converted_value
+                else:
+                    converted_value = 0
 
             if device == "cc":
                 if register == "64":
@@ -178,6 +182,8 @@ def get_modbus_values(device, device_instance):
                     converted_value = converted_value
                 elif register == "249":
                     converted_value = solar_association[converted_value]
+                else:
+                    converted_value = 0
 
             #print("device_key: {} register_name: {}".format(device_key, register_name))
             return_data[device_key][register_name] = converted_value
