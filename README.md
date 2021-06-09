@@ -19,3 +19,20 @@ Some sort of server: In my use case, I am using an Ubuntu 20.04 LXD container ru
 - Install Flask: https://www.digitalocean.com/community/tutorials/how-to-serve-flask-applications-with-uwsgi-and-nginx-on-ubuntu-20-04
 
 **Make sure you do not have any firewalls interfering with your web server or connection to the Conext Gateway port 503.  We will be using a socket for the Flask application, so no fw issues to worry there.**
+
+# How to use "query.py"
+query.py is a test app to query the gateway for a single register value along with some debug data.  You have to take care to use the correct options in order to get accurate/readable results:
+
+To query the BatMon for the battery voltage:
+```
+./query.py -i 192.168.0.152 -p 503 -u 190 -r 70 -t uint32
+port: 503
+unit_id: 190
+reg: 70
+type: uint32
+reg_count: 2
+hold_register: [0, 53280]
+converted value: 53280
+```
+
+This return data demonstrates what we are sending to the gateway and what the raw data looks like that is returned: "53280" which when devided by 1000 we get 53.28V which is what we want to know.
