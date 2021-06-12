@@ -1,0 +1,13 @@
+[Unit]
+Description=uWSGI instance to serve solarmonitor
+After=network.target
+
+[Service]
+User=dchristensen
+Group=www-data
+WorkingDirectory=<PATH TO WHERE YOU INSTALLED SOLARMONITOR>/solarmonitor
+Environment="PATH=<PATH TO WHERE YOU INSTALLED SOLARMONITOR>/solarmonitor/ModBusTCP/bin"
+ExecStart=<PATH TO WHERE YOU INSTALLED SOLARMONITOR>/solarmonitor/ModBusTCP/bin/uwsgi --ini solarmonitor.ini
+
+[Install]
+WantedBy=multi-user.target
