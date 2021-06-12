@@ -24,8 +24,31 @@ In order to use 'solarmonitor.py' or 'query.py', you'll need to 'pip' install 'p
 ```
 sudo pip3 install pyModbusTCP
 ```
-
 In this case, I'm using Python 3.8 (which you should be using Python3 by now - right?!?!?)
+
+# Add to systemd for startup control
+You can edit the 'solarmonitor.service' file to reflect you path to the solarmonitor installation directory and then copy to:
+```
+/etc/systemd/system/solarmonitor.service
+```
+At this point, you can:
+```
+sudo systemctl daemon-reload
+sudo systemctl start solarmonitor
+sudo systemctl status solarmonitor
+sudo systemctl enable solarmonitor
+```
+If you encounter a problem with 'start':
+```
+sudo journalctl -xe
+```
+and check out the errors.  You probably have a path issue.
+
+Once 'solarmonitor' is running:
+```
+ps -ef | grep solarmonitor
+```
+You can enable NGINX to proxy the connections to 'solarmonitor' and start serving the data for API access.  See NGINX docs for how to enable/configure as a reverse proxy.
 
 # How to use "query.py"
 query.py is a test app to query the gateway for a single register value along with some debug data.  You have to take care to use the correct options in order to get accurate/readable results:
