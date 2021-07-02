@@ -1,6 +1,6 @@
 ## conext-api
 
-API built using the Flask web application framework to provide a ModBusTCP gateway to Schneider Conext Gateway.
+API built using the Flask web application framework to provide a ModBusTCP gateway to Schneider Conext Gateway.  The Python code which does the actual querying to the Conext Gateway relies on the 'pyModbusTCP' Python module.
 
 # Notes
 Some of the links may have changed since I originally wrote this, but you should have enough bread crumbs to follow to get the information you need.
@@ -19,6 +19,36 @@ Some sort of server: In my use case, I am using an Ubuntu 20.04 LXD container ru
 - Install Flask: https://www.digitalocean.com/community/tutorials/how-to-serve-flask-applications-with-uwsgi-and-nginx-on-ubuntu-20-04
 
 **Make sure you do not have any firewalls interfering with your web server or connection to the Conext Gateway port 503.  We will be using a socket for the Flask application, so no fw issues to worry there.**
+
+In order to use 'solarmonitor.py' or 'query.py', you'll need to 'pip' install 'pyModbusTCP' (obviously, you'll also need pip installed):
+```
+sudo pip3 install pyModbusTCP
+```
+In this case, I'm using Python 3.8 (which you should be using Python3 by now - right?!?!?)
+
+# Add to systemd for startup control
+You can edit the 'solarmonitor.service' file to reflect you path to the solarmonitor installation directory and then copy to:
+```
+/etc/systemd/system/solarmonitor.service
+```
+At this point, you can:
+```
+sudo systemctl daemon-reload
+sudo systemctl start solarmonitor
+sudo systemctl status solarmonitor
+sudo systemctl enable solarmonitor
+```
+If you encounter a problem with 'start':
+```
+sudo journalctl -xe
+```
+and check out the errors.  You probably have a path issue.
+
+Once 'solarmonitor' is running:
+```
+ps -ef | grep solarmonitor
+```
+You can enable NGINX to proxy the connections to 'solarmonitor' and start serving the data for API access.  See NGINX docs for how to enable/configure as a reverse proxy.
 
 # How to use "query.py"
 query.py is a test app to query the gateway for a single register value along with some debug data.  You have to take care to use the correct options in order to get accurate/readable results:
