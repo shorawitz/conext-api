@@ -55,7 +55,7 @@ query.py is a test app to query the gateway for a single register value along wi
 
 To query the BatMon for the battery voltage:
 ```
-./query.py -i 192.168.0.152 -p 503 -u 190 -r 70 -t uint32
+./query.py -i <Conext Gateway IP | FQDN> -p 503 -u 190 -r 70 -t uint32
 port: 503
 unit_id: 190
 reg: 70
@@ -66,3 +66,6 @@ converted value: 53280
 ```
 
 This return data demonstrates what we are sending to the gateway and what the raw data looks like that is returned: "53280" which when devided by 1000 we get 53.28V which is what we want to know.
+
+# Home Assistant Integration
+I've added a snippet of my HA configuration.yaml file to this repo as well.  I hope it helps.
