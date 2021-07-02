@@ -1,0 +1,117 @@
+##
+# A snippet of my configuration.yaml to show how I'm including the conext-api data for Home Assistant
+sensor battery_primary:
+  - platform: rest
+    name: battery_sensors
+    resource: http://<Your Conext-API Gateway FQDN | IP>/battery
+        device_class: battery
+        unit_of_measurement: "%"
+      battery_primary_capacity:
+        value_template: "{{state_attr('sensor.battery_sensors', 'primary')['capacity']}}"
+        device_class: battery
+        unit_of_measurement: "Ah"
+      battery_primary_temperature:
+        value_template: "{{state_attr('sensor.battery_sensors', 'primary')['temp']}}"
+        device_class: battery
+        unit_of_measurement: "C"
+      battery_primary_voltage:
+        value_template: "{{state_attr('sensor.battery_sensors', 'primary')['voltage']}}"
+        device_class: battery
+        unit_of_measurement: "V"
+
+sensor inverter_primary:
+  - platform: rest
+    name: inverter_sensors
+    resource: http://<Your Conext-API Gateway FQDN | IP>/inverter
+    device_class: power
+    scan_interval:
+      seconds: 5
+    json_attributes:
+      - primary
+    value_template: "OK"
+    verify_ssl: false
+  - platform: template
+    sensors:
+      inverter_primary_name:
+        value_template: "{{state_attr('sensor.inverter_sensors', 'primary')['name']}}"
+        device_class: power
+      inverter_primary_state:
+        value_template: "{{state_attr('sensor.inverter_sensors', 'primary')['state']}}"
+        device_class: power
+      inverter_primary_enabled:
+        value_template: "{{state_attr('sensor.inverter_sensors', 'primary')['enabled']}}"
+        device_class: power
+      inverter_primary_faults:
+        value_template: "{{state_attr('sensor.inverter_sensors', 'primary')['faults']}}"
+        device_class: power
+      inverter_primary_warnings:
+        value_template: "{{state_attr('sensor.inverter_sensors', 'primary')['warnings']}}"
+        device_class: power
+      inverter_primary_status:
+        value_template: "{{state_attr('sensor.inverter_sensors', 'primary')['status']}}"
+        device_class: power
+      inverter_primary_load:
+        value_template: "{{state_attr('sensor.inverter_sensors', 'primary')['load']}}"
+        device_class: power
+        unit_of_measurement: "W"
+
+sensor cc_all:
+  - platform: rest
+    name: cc_sensors
+    resource: http://<Your Conext-API Gateway FQDN | IP>/cc
+    device_class: power
+    scan_interval:
+      seconds: 5
+    json_attributes:
+      - primary
+      - secondary
+    value_template: "OK"
+    verify_ssl: false
+  - platform: template
+    sensors:
+      cc_primary_name:
+        value_template: "{{state_attr('sensor.cc_sensors', 'primary')['name']}}"
+        device_class: power
+      cc_primary_state:
+        value_template: "{{state_attr('sensor.cc_sensors', 'primary')['state']}}"
+        device_class: power
+      cc_primary_faults:
+        value_template: "{{state_attr('sensor.cc_sensors', 'primary')['faults']}}"
+        device_class: power
+      cc_primary_warnings:
+        value_template: "{{state_attr('sensor.cc_sensors', 'primary')['warnings']}}"
+        device_class: power
+      cc_primary_status:
+        value_template: "{{state_attr('sensor.cc_sensors', 'primary')['status']}}"
+        device_class: power
+      cc_primary_pvpower:
+        value_template: "{{state_attr('sensor.cc_sensors', 'primary')['pvpower']}}"
+        device_class: power
+        unit_of_measurement: "W"
+      cc_primary_dcpower:
+        value_template: "{{state_attr('sensor.cc_sensors', 'primary')['dcpower']}}"
+        device_class: power
+        unit_of_measurement: "W"
+      cc_secondary_name:
+        value_template: "{{state_attr('sensor.cc_sensors', 'secondary')['name']}}"
+        device_class: power
+      cc_secondary_state:
+        value_template: "{{state_attr('sensor.cc_sensors', 'secondary')['state']}}"
+        device_class: power
+      cc_secondary_faults:
+        value_template: "{{state_attr('sensor.cc_sensors', 'secondary')['faults']}}"
+        device_class: power
+      cc_secondary_warnings:
+        value_template: "{{state_attr('sensor.cc_sensors', 'secondary')['warnings']}}"
+        device_class: power
+      cc_secondary_status:
+        value_template: "{{state_attr('sensor.cc_sensors', 'secondary')['status']}}"
+        device_class: power
+      cc_secondary_pvpower:
+        value_template: "{{state_attr('sensor.cc_sensors', 'secondary')['pvpower']}}"
+        device_class: power
+        unit_of_measurement: "W"
+      cc_secondary_dcpower:
+        value_template: "{{state_attr('sensor.cc_sensors', 'secondary')['dcpower']}}"
+        device_class: power
+        unit_of_measurement: "W"
