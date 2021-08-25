@@ -44,7 +44,11 @@ registers_data = {
         "faults": "68,1,0",
         "warnings": "69,1,0",
         "status": "73,1,0",
+        "pvvoltage": "76,2,1000",
+        "pvcurrent": "78,2,1000",
         "pvpower": "80,2,0",
+        "dcvoltage": "88,2,1000",
+        "dccurrent": "90,2,1000",
         "dcpower": "92,2,0",
         "solararray": "249,1,0"
     }
@@ -128,7 +132,10 @@ def get_modbus_values(device, device_instance):
             # Fix hold_reg values
             if int(reg_len) == 2:
                 #print("reg_len: {} - hold_reg_arr: {}".format(reg_len, hold_reg_arr))
-                converted_value = hold_reg_arr[1] - hold_reg_arr[0]
+                if hold_reg_arr[0] == 65535:
+                    converted_value = hold_reg_arr[1] - hold_reg_arr[0]
+                else:
+                    converted_value = hold_reg_arr[0] * 65536 + hold_reg_arr[1]
             elif int(reg_len) == 8:
                 #print("reg_len: {} - hold_reg_arr: {}".format(reg_len, hold_reg_arr))
                 string_chars = ""
