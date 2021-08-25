@@ -74,7 +74,10 @@ hold_regs = client.read_holding_registers(int(reg), reg_count)
 print("hold_register: {}".format(str(hold_regs)))
 
 if reg_count == 2:
-    converted_value = hold_regs[1] - hold_regs[0]
+    if hold_regs[0] == 65535:
+        converted_value = hold_regs[1] - hold_regs[0]
+    else:
+        converted_value = hold_regs[0] * 65536 + hold_regs[1]
 elif reg_count == 1:
     converted_value = hold_regs[0]
 elif reg_count == 8:
