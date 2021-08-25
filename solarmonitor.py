@@ -36,7 +36,23 @@ registers_data = {
         "faults": "75,1,0",
         "warnings": "76,1,0",
         "status": "122,1,0",
-        "load": "154,2,0"
+        "load": "154,2,0",
+        "ac1_voltage": "126,2,1000",
+        "ac1_qualified_duration": "120,2,0",
+        "ac1_power": "132,2,0",
+        "ac1_l1_volts": "142,2,1000",
+        "ac1_l1_current": "146,2,1000",
+        "ac1_l2_volts": "144,2,1000",
+        "ac1_l2_current": "148,2,1000",
+        "ac1_frequency": "130,2,100",
+        "ac2_voltage": "162,2,1000",
+        "ac2_qualified_duration": "170,2,0",
+        "ac2_power": "172,2,0",
+        "ac2_l1_volts": "178,2,1000",
+        "ac2_l1_current": "180,2,1000",
+        "ac2_l2_volts": "182,2,1000",
+        "ac2_l2_current": "184,2,1000",
+        "ac2_frequency": "166,2,100"
     },
     "cc": {
         "name": "0,8,0",
@@ -134,8 +150,13 @@ def get_modbus_values(device, device_instance):
                 #print("reg_len: {} - hold_reg_arr: {}".format(reg_len, hold_reg_arr))
                 if hold_reg_arr[0] == 65535:
                     converted_value = hold_reg_arr[1] - hold_reg_arr[0]
-                else:
+                elif hold_reg_arr[0] > 0 and hold_reg_arr[0] < 50:
                     converted_value = hold_reg_arr[0] * 65536 + hold_reg_arr[1]
+                # Hack to fix Frequency values - for now
+                elif register in ["130","166"]:
+                    converted_value = hold_reg_arr[0]
+                else:
+                    converted_value = hold_reg_arr[1]
             elif int(reg_len) == 8:
                 #print("reg_len: {} - hold_reg_arr: {}".format(reg_len, hold_reg_arr))
                 string_chars = ""
@@ -157,12 +178,9 @@ def get_modbus_values(device, device_instance):
             if device == "battery":
                 if register == "70":
                     converted_value = converted_value / int(extra)
-                    converted_value = converted_value
                 elif register == "74":
                     converted_value = converted_value * 0.01 + int(extra)
-                elif register == "76":
-                    converted_value = converted_value
-                elif register == "88":
+                elif register in ["76","88"]:
                     converted_value = converted_value
                 else:
                     converted_value = 0
@@ -172,9 +190,12 @@ def get_modbus_values(device, device_instance):
                     converted_value = operating_state[converted_value]
                 elif register == "122":
                     converted_value = inverter_status[converted_value]
-                elif register == "154":
+                elif register in ["120","132","154","170","172"]:
                     #print("Inverter load: {}".format(converted_value))
                     converted_value = converted_value
+                elif register in ["126","130","142","144","146","148","162","166","178","180","182","184"]:
+                    #print("Inverter load: {}".format(converted_value))
+                    converted_value = converted_value / int(extra)
                 else:
                     converted_value = 0
 
@@ -183,17 +204,19 @@ def get_modbus_values(device, device_instance):
                     converted_value = operating_state[converted_value]
                 elif register == "73":
                     converted_value = cc_status[converted_value]
-                elif register == "76":
-                    converted_value = converted_value
-                elif register == "78":
-                    converted_value = converted_value
-                elif register == "80":
-                    converted_value = converted_value
-                elif register == "88":
-                    converted_value = converted_value
-                elif register == "90":
-                    converted_value = converted_value
-                elif register == "92":
+                elif register == "68":
+                    if converted_value == 1:
+                        converted_value = "Has Active Faults"
+                    else:
+                        converted_value = "No Active Faults"
+                elif register == "69":
+                    if converted_value == 1:
+                        converted_value = "Has Active Warnings"
+                    else:
+                        converted_value = "No Active Warnings"
+                elif register in  ["76","78","88","90"]:
+                    converted_value = converted_value / int(extra)
+                elif register in ["80","92"]:
                     converted_value = converted_value
                 elif register == "249":
                     converted_value = solar_association[converted_value]
