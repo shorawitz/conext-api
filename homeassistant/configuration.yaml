@@ -54,6 +54,26 @@ sensor inverter_primary:
         value_template: "{{state_attr('sensor.inverter_sensors', 'primary')['load']}}"
         device_class: power
         unit_of_measurement: "W"
+      inverter_ac2_load:
+        value_template: "{{state_attr('sensor.inverter_sensors', 'primary')['ac2_power']}}"
+        device_class: power
+        unit_of_measurement: "W"
+      inverter_ac2_l1_volts:
+        value_template: "{{state_attr('sensor.inverter_sensors', 'primary')['ac2_l1_volts']}}"
+        device_class: power
+        unit_of_measurement: "V"
+      inverter_ac2_l1_current:
+        value_template: "{{state_attr('sensor.inverter_sensors', 'primary')['ac2_l1_current']}}"
+        device_class: power
+        unit_of_measurement: "A"
+      inverter_ac2_l2_volts:
+        value_template: "{{state_attr('sensor.inverter_sensors', 'primary')['ac2_l2_volts']}}"
+        device_class: power
+        unit_of_measurement: "V"
+      inverter_ac2_l2_current:
+        value_template: "{{state_attr('sensor.inverter_sensors', 'primary')['ac2_l2_current']}}"
+        device_class: power
+        unit_of_measurement: "A"
 
 sensor cc_all:
   - platform: rest
@@ -84,10 +104,26 @@ sensor cc_all:
       cc_primary_status:
         value_template: "{{state_attr('sensor.cc_sensors', 'primary')['status']}}"
         device_class: power
+      cc_primary_pvvoltage:
+        value_template: "{{state_attr('sensor.cc_sensors', 'primary')['pvvoltage']}}"
+        device_class: power
+        unit_of_measurement: "V"
+      cc_primary_pvcurrent:
+        value_template: "{{state_attr('sensor.cc_sensors', 'primary')['pvcurrent']}}"
+        device_class: power
+        unit_of_measurement: "A"
       cc_primary_pvpower:
         value_template: "{{state_attr('sensor.cc_sensors', 'primary')['pvpower']}}"
         device_class: power
         unit_of_measurement: "W"
+      cc_primary_dcvoltage:
+        value_template: "{{state_attr('sensor.cc_sensors', 'primary')['dcvoltage']}}"
+        device_class: power
+        unit_of_measurement: "V"
+      cc_primary_dccurrent:
+        value_template: "{{state_attr('sensor.cc_sensors', 'primary')['dccurrent']}}"
+        device_class: power
+        unit_of_measurement: "A"
       cc_primary_dcpower:
         value_template: "{{state_attr('sensor.cc_sensors', 'primary')['dcpower']}}"
         device_class: power
@@ -107,10 +143,26 @@ sensor cc_all:
       cc_secondary_status:
         value_template: "{{state_attr('sensor.cc_sensors', 'secondary')['status']}}"
         device_class: power
+      cc_secondary_pvvoltage:
+        value_template: "{{state_attr('sensor.cc_sensors', 'secondary')['pvvoltage']}}"
+        device_class: power
+        unit_of_measurement: "V"
+      cc_secondary_pvcurrent:
+        value_template: "{{state_attr('sensor.cc_sensors', 'secondary')['pvcurrent']}}"
+        device_class: power
+        unit_of_measurement: "A"
       cc_secondary_pvpower:
         value_template: "{{state_attr('sensor.cc_sensors', 'secondary')['pvpower']}}"
         device_class: power
         unit_of_measurement: "W"
+      cc_secondary_dcvoltage:
+        value_template: "{{state_attr('sensor.cc_sensors', 'secondary')['dcvoltage']}}"
+        device_class: power
+        unit_of_measurement: "V"
+      cc_secondary_dccurrent:
+        value_template: "{{state_attr('sensor.cc_sensors', 'secondary')['dccurrent']}}"
+        device_class: power
+        unit_of_measurement: "A"
       cc_secondary_dcpower:
         value_template: "{{state_attr('sensor.cc_sensors', 'secondary')['dcpower']}}"
         device_class: power
