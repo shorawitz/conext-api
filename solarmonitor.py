@@ -183,7 +183,15 @@ def get_modbus_values(device, device_instance):
                     converted_value = operating_state[converted_value]
                 elif register == "73":
                     converted_value = cc_status[converted_value]
+                elif register == "76":
+                    converted_value = converted_value
+                elif register == "78":
+                    converted_value = converted_value
                 elif register == "80":
+                    converted_value = converted_value
+                elif register == "88":
+                    converted_value = converted_value
+                elif register == "90":
                     converted_value = converted_value
                 elif register == "92":
                     converted_value = converted_value
