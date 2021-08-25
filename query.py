@@ -76,8 +76,10 @@ print("hold_register: {}".format(str(hold_regs)))
 if reg_count == 2:
     if hold_regs[0] == 65535:
         converted_value = hold_regs[1] - hold_regs[0]
-    else:
+    elif hold_regs[0] == 1 and hold_regs[0] < 50:
         converted_value = hold_regs[0] * 65536 + hold_regs[1]
+    else:
+        converted_value = hold_regs[0]
 elif reg_count == 1:
     converted_value = hold_regs[0]
 elif reg_count == 8:
