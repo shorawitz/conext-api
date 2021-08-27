@@ -95,7 +95,9 @@ inverter_status = {
     1035: "Gen Support",
     1036: "Sell-to-Grid",
     1037: "Load Shaving",
-    1038: "Grid Frequency Stabilization"
+    1038: "Grid Frequency Stabilization",
+    1039: "AC Coupling",
+    1040: "Reverse lbatt"
 }
 
 cc_status = {
@@ -110,7 +112,16 @@ cc_status = {
     776: "Charger Disabled",
     777: "Qualifying AC",
     778: "Qualifying APS",
-    779: "Engaging Charger"
+    779: "Engaging Charger",
+    780: "Charger Fault",
+    781: "Charger Suspend",
+    782: "AC Good",
+    783: "APS Good",
+    784: "AC Fault",
+    785: "Charge",
+    786: "Absorption Exit Pending",
+    787: "Ground Fault",
+    788: "AC Good Pending"
 }
 
 solar_association = {
