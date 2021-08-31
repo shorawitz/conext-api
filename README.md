@@ -60,7 +60,8 @@ curl http://<IP | FQDN of NGINX server>/inverter
 Here we can see the return data shows the "name" assigned to the inverter, the "state" of "Operatoring" and that the inverter is "enabled", as well as the "faults" and "warnings", "status" (which in my current use case is using "AC Pass Through") and the current "load".
 
 # For an easier experience... try Docker
-I have included a working setup for using Docker.  With the necessary files.
+I have included a working setup for using Docker with all of the necessary files.
+
 **You will still need to edit "solarmonitor.py" to change my IP address to your IP for your Conext Gateway.**
 
 With this option, you don't need to be a Linux guru to run the app.  Just install Docker on your favorite O/S (Mac, Windows or Linux) and you can get this working too.
