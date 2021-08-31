@@ -28,7 +28,7 @@ In this case, I'm using Python 3.8 (which you should be using Python3 by now - r
 
 **I have hard-coded my Conext Gateway IP address into solarmonitor.py.  You will need to update that address with your own Conext Gateway IP address: Line 123 in the file.**
 
-# Add to systemd for startup control
+## Add to systemd for startup control
 You will need to edit the 'solarmonitor.service' file to reflect the correct path to the solarmonitor installation directory and then copy the file to:
 ```
 /etc/systemd/system/solarmonitor.service
