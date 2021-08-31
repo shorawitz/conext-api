@@ -103,7 +103,7 @@ This return data demonstrates what we are sending to the gateway and what the ra
 # Home Assistant Integration
 I've added a snippet of my HA configuration.yaml file to this repo as well.  I hope it helps.
 
-#Todo's
+# Todo's
 - Get the image to load on Home Assistant and create an interation.
 - Integrate with HA Energy cards
 - Show how to use Grafana to miminc capabilities of Conext Gateway software.  (This is useful for remote monitoring as Schneider's app is currently lacking)
