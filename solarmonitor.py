@@ -279,9 +279,14 @@ class CC(Resource):
         #args = cc_put_args.parse_args()
         return {"command": "received for instance: {}".format(instance)}
 
+class index(Resource):
+    def get(self):
+        return "Solar monitor API"
+
 api.add_resource(Battery, "/battery", "/battery/<string:instance>")
 api.add_resource(Inverter, "/inverter", "/inverter/<string:instance>")
 api.add_resource(CC, "/cc", "/cc/<string:instance>")
+api.add_resource(index,"/")
 
 if __name__ == "__main__":
     app.run(debug=False)

@@ -62,7 +62,7 @@ Here we can see the return data shows the "name" assigned to the inverter, the "
 # For an easier experience... try Docker
 I have included a working setup for using Docker with all of the necessary files.
 
-**You will still need to edit "solarmonitor.py" to change my IP address to your IP for your Conext Gateway.**
+**You will still need to edit "solarmonitor.py" to change my IP address to your IP for your Conext Gateway.  See above**
 
 With this option, you don't need to be a Linux guru to run the app.  Just install Docker on your favorite O/S (Mac, Windows or Linux) and you can get this working too.
 
@@ -70,16 +70,18 @@ To get things going, you'll obviously need Docker.  Check out this reference if 
 https://docs.docker.com/
 
 ```
-cd Docker
 docker build -t solarmonitor
 ```
+*You may need to modify for Windows - never tried it myself*
 
-This will build a Docker image named "solarmonitor" based on Ubuntu LTS 20.04 and install the application along with all of the needed packages and modules to run the application.  Along with "solarmonitor", the image contains a working NGINX proxy listening on port 80.  You can test it out:
+This will build a Docker image (<500MB) named **"solarmonitor"** based on Ubuntu LTS 20.04 and install the application along with all of the needed packages and modules to run the application.  Along with **"solarmonitor"**, the image contains a working NGINX proxy listening on port 80.  You can test it out:
 ```
 docker run -p 8080:80 solarmonitor
 ```
 
 Point your browser to http://localhost:8080/inverter and you should see your XW information.
+
+This image works exactly the same as the manual install, just makes it a bit easier to deploy.  
 
 # How to use "query.py"
 query.py is a test app to query the gateway for a single register value along with some debug data.  You have to take care to use the correct options in order to get accurate/readable results:
@@ -100,3 +102,8 @@ This return data demonstrates what we are sending to the gateway and what the ra
 
 # Home Assistant Integration
 I've added a snippet of my HA configuration.yaml file to this repo as well.  I hope it helps.
+
+#Todo's
+- Get the image to load on Home Assistant and create an interation.
+- Integrate with HA Energy cards
+- Show how to use Grafana to miminc capabilities of Conext Gateway software.  (This is useful for remote monitoring as Schneider's app is currently lacking)
