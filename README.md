@@ -10,7 +10,7 @@ At the time of this writing (2021/05/14,) the Modbus documentation could be down
 The code is a little rough.  I haven't decided if separating the registers from the code is worthwhile or not.  It is just as easy to edit the Python code to update the devices and register data.  For more information, check out my YouTube channel:
 [JC/DC in the AZ](https://www.youtube.com/channel/UC8_TU2g-Yl1oMCts3pkXCbQ)
 
-# Setup
+# Setup - stand alone instance running on bare metal or a VM
 You'll of course need a Schneider Conext Gateway connected to your network or using a serial ModBus connection to your computer.
 
 Some sort of server: In my use case, I am using an Ubuntu 20.04 LXD container running on my Ubuntu 20.04 server, but this could easily run on Docker, a virtual machine or a dedicated system (e.g Raspberry Pi) and not necessarily Linux.  The only requirements are Python, Flask, and NGINX.  I will provide some references to how I setup my installation, but getting the base setup is a bit beyond this guide
@@ -58,6 +58,27 @@ curl http://<IP | FQDN of NGINX server>/inverter
 {"primary": {"name": "XW6848-21", "state": "Operating", "enabled": 1, "faults": 0, "warnings": 0, "status": "AC Pass Through", "load": 1622}}
 ```
 Here we can see the return data shows the "name" assigned to the inverter, the "state" of "Operatoring" and that the inverter is "enabled", as well as the "faults" and "warnings", "status" (which in my current use case is using "AC Pass Through") and the current "load".
+
+# For an easier experience... try Docker
+I have included a working setup for using Docker.  With the necessary files.
+**You will still need to edit "solarmonitor.py" to change my IP address to your IP for your Conext Gateway.**
+
+With this option, you don't need to be a Linux guru to run the app.  Just install Docker on your favorite O/S (Mac, Windows or Linux) and you can get this working too.
+
+To get things going, you'll obviously need Docker.  Check out this reference if you're new to Docker:
+https://docs.docker.com/
+
+```
+cd Docker
+docker build -t solarmonitor
+```
+
+This will build a Docker image named "solarmonitor" based on Ubuntu LTS 20.04 and install the application along with all of the needed packages and modules to run the application.  Along with "solarmonitor", the image contains a working NGINX proxy listening on port 80.  You can test it out:
+```
+docker run -p 8080:80 solarmonitor
+```
+
+Point your browser to http://localhost:8080/inverter and you should see your XW information.
 
 # How to use "query.py"
 query.py is a test app to query the gateway for a single register value along with some debug data.  You have to take care to use the correct options in order to get accurate/readable results:
