@@ -10,6 +10,9 @@ At the time of this writing (2021/05/14,) the Modbus documentation could be down
 The code is a little rough.  I haven't decided if separating the registers from the code is worthwhile or not.  It is just as easy to edit the Python code to update the devices and register data.  For more information, check out my YouTube channel:
 [JC/DC in the AZ](https://www.youtube.com/channel/UC8_TU2g-Yl1oMCts3pkXCbQ)
 
+**Make sure you verify the "Modbus Slave Address" for Port 503 in the code.  I hard-coded the ID's to my settings!!!**
+You'll find these in the dictionary "device_ids".  Mine are set to 190, 11, 30 and 31 (BatMon, Inverter, and CC's).  Update the code to what you have as shown in the Conext Gateway.
+
 # Setup - stand alone instance running on bare metal or a VM
 You'll of course need a Schneider Conext Gateway connected to your network or using a serial ModBus connection to your computer.
 
