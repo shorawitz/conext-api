@@ -13,7 +13,7 @@ The code is a little rough.  I haven't decided if separating the registers from 
 # Setup - stand alone instance running on bare metal or a VM
 You'll of course need a Schneider Conext Gateway connected to your network or using a serial ModBus connection to your computer.
 
-Some sort of server: In my use case, I am using an Ubuntu 20.04 LXD container running on my Ubuntu 20.04 server, but this could easily run on Docker, a virtual machine or a dedicated system (e.g Raspberry Pi) and not necessarily Linux.  The only requirements are Python, Flask, and NGINX.  I will provide some references to how I setup my installation, but getting the base setup is a bit beyond this guide
+Some sort of server: In my use case, I am using an Ubuntu 20.04 LXD container running on my Ubuntu 20.04 server, but this could easily run on Docker (see below - I created a HA Add-On using Docker,) a virtual machine or a dedicated system (e.g Raspberry Pi) and not necessarily Linux.  The only requirements are Python, Flask, and NGINX.  I will provide some references to how I setup my installation, but getting the base setup is a bit beyond this guide
 
 - Install NGINX: https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-20-04
 - Install Flask: https://www.digitalocean.com/community/tutorials/how-to-serve-flask-applications-with-uwsgi-and-nginx-on-ubuntu-20-04
