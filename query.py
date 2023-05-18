@@ -8,12 +8,13 @@ import sys, getopt, re
 # Default data type
 data_type = "uint16"
 ip = None
+reg_data = 0
 
 
 try:
-    opts, args = getopt.getopt(sys.argv[1:],"hi:p:u:r:t:",["ip=","port=","unit_id=","register","type"])
+    opts, args = getopt.getopt(sys.argv[1:],"hi:p:u:r:t:d:",["ip=","port=","unit_id=","register","type"])
 except getopt.GetoptError:
-    print('query.py -i <ip address> -p <port> -u <unit_id> -r <register> (-t <type> | default=uint16)')
+    print('query.py -i <ip address> -p <port> -u <unit_id> -r <register> (-t <type> | default=uint16) [-d <register value>]')
     sys.exit(2)
 for opt, arg in opts:
     if opt == '-h':
@@ -22,13 +23,15 @@ for opt, arg in opts:
     elif opt in ("-i", "--ip"):
         ip = arg
     elif opt in ("-p", "--port"):
-        port = arg
+        port = int(arg)
     elif opt in ("-u", "--unit_id"):
-        unit_id = arg
+        unit_id = int(arg)
     elif opt in ("-r", "--register"):
         reg = arg
     elif opt in ("-t", "--type"):
         reg_type = arg
+    elif opt in ("-d", "--data"):
+        reg_data = arg
     else:
         print('Unknown option')
         sys.exit(2)
@@ -44,6 +47,7 @@ client = ModbusClient(host=ip, port=port, auto_open=True, auto_close=True, debug
 
 reg_dict = {}
 reg_count = 1
+is_ok = False
 #reg_type = "uint16"
 
 if reg_type == "uint32":
@@ -61,10 +65,18 @@ print("port: {}".format(port))
 print("unit_id: {}".format(unit_id))
 print("reg: {}".format(reg))
 print("type: {}".format(reg_type))
-print("reg_count: {}".format(reg_count))
+print("reg_count: {}".format(reg_count))    
 
 #print("reg:{} reg_count:{}".format(reg, reg_count))
 #print("reg:{} reg_count:{}".format(type(reg), type(reg_count)))
+
+if (reg_data):
+    print("reg_data: {}".format(reg_data))
+    is_ok = client.write_single_register(int(reg), int(reg_data))
+
+    if is_ok == False:
+        exit(1)
+
 hold_regs = client.read_holding_registers(int(reg), reg_count)
 #input_reg = client.read_input_registers(int(reg), reg_count)
 #discrete_reg = client.read_discrete_inputs(int(reg), reg_count)

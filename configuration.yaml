@@ -1,0 +1,127 @@
+# Conext Gateway hostname/IP and port
+conext_gateway: 192.168.0.152
+modbus_port: 503
+conext_gateway_timeout: 30
+
+# Devices
+device_ids:
+  battery:
+    primary: 190
+  inverter:
+    primary: 12
+  cc:
+    primary: 30
+    secondary: 31
+    tertiary: 170
+
+# Register Data for each device
+registers_data:
+  battery:
+    name: 0,8,0
+    voltage: 70,2,1000
+    temp: 74,2,-273
+    soc: 76,2,0
+    capacity_remaining: 88,2,0
+    capacity: 146,1,0
+  inverter:
+    name: 0,8,0
+    state: 64,1,0
+    enabled: 71,1,0
+    faults: 75,1,0
+    warnings: 76,1,0
+    dc_voltage: 80,2,1000
+    dc_current: 82,2,1000
+    dc_power: 84,2,1000
+    status: 122,1,0
+    l1_voltage: 142,2,1000
+    l2_voltage: 144,2,1000
+    l1_current: 146,2,1000
+    l2_current: 148,2,1000
+    load: 154,2,0
+    ac1_voltage: 126,2,1000
+    ac1_qualified_duration: 120,2,0
+    ac1_power: 132,2,0
+    ac1_l1_volts: 142,2,1000
+    ac1_l1_current: 146,2,1000
+    ac1_l2_volts: 144,2,1000
+    ac1_l2_current: 148,2,1000
+    ac1_frequency: 130,2,100
+    ac2_voltage: 162,2,1000
+    ac2_qualified_duration: 170,2,0
+    ac2_power: 172,2,0
+    ac2_l1_volts: 178,2,1000
+    ac2_l1_current: 180,2,1000
+    ac2_l2_volts: 182,2,1000
+    ac2_l2_current: 184,2,1000
+    ac2_frequency: 166,2,100
+  cc:
+    name: 0,8,0
+    state: 64,1,0
+    faults: 68,1,0
+    warnings: 69,1,0
+    status: 73,1,0
+    pvvoltage: 76,2,1000
+    pvcurrent: 78,2,1000
+    pvpower: 80,2,0
+    dcvoltage: 88,2,1000
+    dccurrent: 90,2,1000
+    dcpower: 92,2,0
+    solararray: 249,1,0
+
+# Status code: description
+operating_state:
+  0: Hibernate
+  1: Power Save
+  2: Safe Mode
+  3: Operating
+  4: Diagnostic Mode
+  5: Remote Power Off
+  255: Data Not Available
+
+inverter_status:
+  1024: Invert
+  1025: AC Pass Through
+  1026: APS Only
+  1027: Load Sense
+  1028: Inverter Disabled
+  1029: Load Sense Ready
+  1030: Engaging Inverter
+  1031: Invert Fault
+  1032: Inverter Standby
+  1033: Grid-Tied
+  1034: Grid Support
+  1035: Gen Support
+  1036: Sell-to-Grid
+  1037: Load Shaving
+  1038: Grid Frequency Stabilization
+  1039: AC Coupling
+  1040: Reverse lbatt
+
+cc_status:
+  768: No Charging
+  769: Bulk
+  770: Absorption
+  771: Overcharge
+  772: Equalize
+  773: Float
+  774: No Float
+  775: Constant VI
+  776: Charger Disabled
+  777: Qualifying AC
+  778: Qualifying APS
+  779: Engaging Charger
+  780: Charger Fault
+  781: Charger Suspend
+  782: AC Good
+  783: APS Good
+  784: AC Fault
+  785: Charge
+  786: Absorption Exit Pending
+  787: Ground Fault
+  788: AC Good Pending
+
+solar_association:
+  21: Solar Array 1
+  22: Solar Array 2
+  23: Solar Array 3
+  24: Solar Array 4

@@ -1,0 +1,13 @@
+name: "Solar Monitor"
+description: "Solar Monitor API add-on"
+version: "2.6"
+slug: "solar_monitor"
+arch:
+  - armhf
+  - armv7
+  - aarch64
+  - amd64
+  - i386
+startup: "application"
+boot: "auto"
+url: "https://github.com/shorawitz/conext-api"

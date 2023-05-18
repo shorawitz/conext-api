@@ -1,0 +1,11 @@
+{
+  "name": "Solar Monitor",
+  "version": "2.6",
+  "slig": "solar_monitor",
+  "description": "Solar Monitor API add-on",
+  "arch": ["armhf", "armv7", "aarch64", "amd64", "i386"],
+  "startup": "application",
+  "boot": "auto",
+  "options": {},
+  "schema": {}
+}
