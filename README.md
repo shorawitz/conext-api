@@ -70,7 +70,7 @@ To get things going, you'll obviously need Docker.  Check out this reference if 
 https://docs.docker.com/
 
 ```
-docker build -t solarmonitor
+docker build -t solarmonitor .
 ```
 *You may need to modify for Windows - never tried it myself*
 
