@@ -27,7 +27,7 @@ def get_modbus_values(device, device_instance):
     devices = device_ids[device]
     register_data = registers_data[device]
     return_data = {}
-    print("DEBUG - devices: {}".format(devices))
+    #print("DEBUG - devices: {}".format(devices))
     for device_key in devices:
         # If we're looking for a specific device, let's check
         if device_instance and device_instance != device_key:
