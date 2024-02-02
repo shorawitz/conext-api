@@ -128,7 +128,10 @@ def get_modbus_values(device, device_instance):
                         converted_value = converted_value
 
                 #print("device_key: {} register_name: {}".format(device_key, register_name))
-                return_data[device_key][register_name] = converted_value
+                if converted_value:
+                    return_data[device_key][register_name] = converted_value
+                else:
+                    return_data[device_key][register_name] = None
                 sleep(0.1)
     
     return return_data
