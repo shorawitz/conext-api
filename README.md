@@ -24,7 +24,7 @@ In order to use 'solarmonitor.py' or 'query.py', you'll need to 'pip' install 'p
 ```
 sudo pip3 install pyModbusTCP
 ```
-In this case, I'm using Python 3.8 (which you should be using Python3 by now - right?!?!?)
+In this case, I'm using Python 3.11.6 (which you should be using Python3 by now - right?!?!?)
 
 **I have hard-coded my Conext Gateway IP address into solarmonitor.py.  You will need to update that address with your own Conext Gateway IP address: Line 123 in the file.**
 
